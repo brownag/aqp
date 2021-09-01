@@ -137,7 +137,14 @@
 #' sp1 <- transform(sp1, midpt = (bottom - top) / 2 + top, bound_sd = midpt / 12)
 #' quantile(sp1$bound_sd)
 #' 
-#' perturb(p, boundary.attr = "bound_sd")
+#' perturb(p, boundary.attr = "bound_sd", n = 10)
+#' 
+#' 
+#' ### Custom IDs
+#'
+#' ids <- sprintf("%s-%03d", profile_id(p), 1:10) 
+#' perturb(p, boundary.attr = "bound_sd", id = ids)
+#' 
 #' 
 perturb <- function(p,
                     n = 100,
@@ -349,8 +356,7 @@ perturb <- function(p,
   ## reset horizon IDs
   hzID(res) <- as.character(1:nrow(res))
 
-  # preserve original horizon designation
-  hzdesgnname(res) <- hzdesgnname(p)
+  res <- .transfer.metadata.aqp(p, res)
   
   if (custom.ids & length(unique(id)) == length(res))
     profile_id(res) <- id
