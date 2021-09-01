@@ -1,10 +1,12 @@
-# Single-profile Perturbation Visualization
-#' Title
+#' Single-profile Perturbation Visualization
 #'
-#' @param p 
-#' @param v 
-#' @param n_sim 
-#' @param bw 
+#' Demonstrate distributions of aggregate properties "perturbed"
+#' Demonstrations of interactions between property and layer thickness and deviation from the source value as the central value of distribution
+#'
+#' @param p a SoilProfileColleciton
+#' @param v a column name in `horizonNames(p)`
+#' @param n_sim number of perturbed profiles to generate
+#' @param bw default bandwidth for density plots
 #' @param ... 
 #'
 #' @return
@@ -17,6 +19,8 @@ library(grid)
 library(magrittr)
 
 set.seed(123)
+
+# wtd avg properties [0-100] cm for profiles with different value and layer thickness
 
 # profile: 2nd horizon [25, 50] has twice the property `value` than the overlying [0,25] or underlying [50,100] horizon
 # all horizons have an equal 1cm std deviation
@@ -43,18 +47,6 @@ v <- list(
     # "2x in 2nd" = c(1, 1, 2)
   )
 
-perturbComparePlot(
-  p,
-  v,
-  hzidx = 2,
-  n_sim = 10,
-  ylim=c(0,10),
-  xlim=c(1,2),
-  outprop = "avgvalue", 
-  bw = 0.05,
-  main = "weighted average `value` [0,100]"
-)
-
 perturbComparePlot <- function(p, v, 
                                hzidx, 
                                inprop = "value",
@@ -67,15 +59,16 @@ perturbComparePlot <- function(p, v,
   p[[".value"]] <- p[[inprop]]
   
   .perturbutate <- function(x, v, nsim = n_sim, thickness.attr = ".hzd") {
-      stopifnot(length(v) == nrow(x))
-      x[[thickness.attr]] <- v
-      
-      x2 <- perturb(x[1], n = n_sim, thickness.attr = '.hzd')
-      x2[[".top"]] <- x2[[hzd[1]]]
-      x2[[".bottom"]] <- x2[[hzd[2]]]
-      x3 <- mutate_profile(x2, 
-                           thickness = .bottom - .top,
-                           avgvalue = sum(.value * thickness / sum(thickness)))
+
+    stopifnot(length(v) == nrow(x))
+    x[[thickness.attr]] <- v
+    
+    x2 <- perturb(x[1], n = n_sim, thickness.attr = '.hzd')
+    x2[[".top"]] <- x2[[hzd[1]]]
+    x2[[".bottom"]] <- x2[[hzd[2]]]
+    x3 <- mutate_profile(x2, 
+                         thickness = .bottom - .top,
+                         avgvalue = sum(.value * thickness / sum(thickness)))
   }
   
   p2 <- mutate_profile(p, avgvalue = sum(.value * (.bottom - .top) / sum(.bottom - .top)), thickness = .bottom - .top)
@@ -114,5 +107,17 @@ perturbComparePlot <- function(p, v,
   grid::grid.raster(png::readPNG(tf))
 
 }
+
+perturbComparePlot(
+  p,
+  v,
+  hzidx = 2,
+  n_sim = 10,
+  ylim=c(0,10),
+  xlim=c(1,2),
+  outprop = "avgvalue", 
+  bw = 0.05,
+  main = "weighted average `value` [0,100]"
+)
 
 
