@@ -67,6 +67,9 @@
 
 #' @param sample logical: should ssc be random sampled from the lookup table?
 #' (default: FALSE)
+#' @param what character. Output mode for `texcl_to_ssc()`: `"centroid"`
+#' (default) returns sand/silt/clay centroids, `"limits"` returns class
+#' limits, and `"both"` returns centroids and class limits.
 #' 
 #' @return - `texcl_to_ssc`: A `data.frame` containing columns `"sand"`,`"silt"`, `"clay"`
 #'
@@ -141,7 +144,27 @@
 #' ssc  <- rbind(ssc1, ssc2)
 #' aggregate(clay ~ sample + texcl, data = ssc, summary)
 #' }
-texcl_to_ssc <- function(texcl = NULL, clay = NULL, sample = FALSE) {
+texcl_to_ssc <- function(texcl = NULL, clay = NULL, sample = FALSE, what = c("centroid", "limits", "both")) {
+  what <- match.arg(what)
+
+  if (what == "limits") {
+    if (!is.null(clay)) {
+      warning("`clay` is ignored when `what = 'limits'`")
+    }
+    if (isTRUE(sample)) {
+      warning("`sample` is ignored when `what = 'limits'`")
+    }
+    return(texcl_to_classlimit(texcl))
+  }
+
+  if (what == "both" && isTRUE(sample)) {
+    stop("`sample = TRUE` is not supported when `what = 'both'`")
+  }
+
+  if (what == "both" && is.list(texcl)) {
+    stop("list input is only supported with `what = 'limits'`")
+  }
+
   # fix for R CMD check
   #  texcl_to_ssc: no visible binding for global variable ‘soiltexture’
   soiltexture <- NULL
@@ -264,6 +287,13 @@ texcl_to_ssc <- function(texcl = NULL, clay = NULL, sample = FALSE) {
   df$rn    <- NULL
   df$texcl <- NULL
   rownames(df) <- NULL
+
+  if (what == "both") {
+    lim <- texcl_to_classlimit(texcl)
+    lim$texcl <- NULL
+    return(cbind(df, lim))
+  }
+
   return(df)
 }
 

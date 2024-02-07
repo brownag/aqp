@@ -1,3 +1,8 @@
+# aqp development
+ * `texcl_to_ssc()` gains `what` argument with `"centroid"`, `"limits"`, and `"both"` output modes
+ * added `texcl_to_classlimit()` for texture class limit lookup and grouped class envelopes
+ * added `ssc_range_to_texcl()` convert sand, silt, clay ranges to one ore more soil texture classes
+
 # aqp 2.3.2 (2026-04-29)
  * new function `formatMunsell()` for safely formatting Munsell colors from hue, value, and chroma
  * `launderMunsell()` gains additional formatting fixes / failures to NA

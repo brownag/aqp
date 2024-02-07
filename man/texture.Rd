@@ -9,7 +9,12 @@
 \alias{fragvol_to_texmod}
 \title{Textural conversions}
 \usage{
-texcl_to_ssc(texcl = NULL, clay = NULL, sample = FALSE)
+texcl_to_ssc(
+  texcl = NULL,
+  clay = NULL,
+  sample = FALSE,
+  what = c("centroid", "limits", "both")
+)
 
 ssc_to_texcl(
   sand = NULL,
@@ -57,6 +62,10 @@ conventions (e.g. c|C, sil|SIL, sl|SL, cos|COS)}
 
 \item{sample}{logical: should ssc be random sampled from the lookup table?
 (default: FALSE)}
+
+\item{what}{character. Output mode for \code{texcl_to_ssc()}: \code{"centroid"}
+(default) returns sand/silt/clay centroids, \code{"limits"} returns class
+limits, and \code{"both"} returns centroids and class limits.}
 
 \item{sand}{vector of sand percentages}
 

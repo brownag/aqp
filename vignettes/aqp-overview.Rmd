@@ -254,8 +254,10 @@ Soil morphology, observed properties, and geomorphic context represent a complex
   * `textureTriangleSummary()`: graphical summary of sand, silt, clay fractions on a soil texture triangle  
   * `bootstrapSoilTexture()`: simulation of realistic compositions (sand, silt, clay) from a small set of example data
   * `SoilTextureLevels()`: ordered factor of soil texture classes
-  * `texcl_to_ssc()`: convert soil texture classes to sand, silt, clay centroids
-  * `ssc_to_texcl()`: convert sand, silt, clay values to soil texture class
+  * `texcl_to_ssc()`: convert soil texture classes to representative sand, silt, clay centroids
+  * `texcl_to_classlimit()`: convert soil texture classes to class limit ranges and midpoint values
+  * `ssc_to_texcl()`: convert sand, silt, clay values to a representative soil texture class
+  * `ssc_range_to_texcl()`: convert sand, silt, clay ranges to one ore more soil texture classes
   * `texture_to_taxpartsize()`: convert soil texture to Soil Taxonomy particle size class
   
 ### Coarse Fragments
