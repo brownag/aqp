@@ -197,6 +197,14 @@
   : Get data from column of horizon or site data in a
   SoilProfileCollection
 
+- [`.colorSig2PerceptualDistMat()`](https://ncss-tech.github.io/aqp/reference/dot-colorSig2PerceptualDistMat.md)
+  : Interpret a color signature containing color groups of CIELAB
+  coordinates using perceptual distance via CIE dE00
+
+- [`.detectColorSpec()`](https://ncss-tech.github.io/aqp/reference/dot-detectColorSpec.md)
+  : Detect color specification from a vector of values, or a matrix of
+  color coordinates
+
 - [`` `[[<-`( ``*`<SoilProfileCollection>`*`)`](https://ncss-tech.github.io/aqp/reference/doublebracket-set.md)
   : Add or change column of horizon or site data in a
   SoilProfileCollection
@@ -535,7 +543,7 @@
   Plot Multiple `SoilProfileCollection` Objects
 
 - [`plotProfileDendrogram()`](https://ncss-tech.github.io/aqp/reference/plotProfileDendrogram.md)
-  : Plot soil profiles below a dendrogram
+  : Plot soil profiles below a dendrogram or cladogram
 
 - [`plot_distance_graph()`](https://ncss-tech.github.io/aqp/reference/plot_distance_graph.md)
   : Between Individual Distance Plot
@@ -602,6 +610,9 @@
 
 - [`shannonEntropy()`](https://ncss-tech.github.io/aqp/reference/shannonEntropy.md)
   : Shannon Entropy
+
+- [`shuffle()`](https://ncss-tech.github.io/aqp/reference/shuffle.md) :
+  Shuffle Horizons of a SoilProfileCollection
 
 - [`sierraTransect`](https://ncss-tech.github.io/aqp/reference/sierraTransect.md)
   : Soil Physical and Chemical Data Related to Studies in the Sierra

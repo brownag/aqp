@@ -7,16 +7,20 @@ Generate a color signature for each soil profile in a collection.
 ``` r
 soilColorSignature(
   spc,
-  r = "r",
-  g = "g",
-  b = "b",
+  color,
+  space = c("sRGB", "CIELAB"),
   method = c("colorBucket", "depthSlices", "pam"),
+  perceptualDistMat = FALSE,
   pam.k = 3,
-  RescaleLightnessBy = 1,
+  prob = c(0.1, 0.5, 0.9),
   useProportions = TRUE,
   pigmentNames = c(".white.pigment", ".red.pigment", ".green.pigment", ".yellow.pigment",
     ".blue.pigment"),
-  apply.fun = lapply
+  apply.fun = lapply,
+  r = NULL,
+  g = NULL,
+  b = NULL,
+  RescaleLightnessBy = NULL
 )
 ```
 
@@ -26,31 +30,36 @@ soilColorSignature(
 
   a `SoilProfileCollection` object
 
-- r:
+- color:
 
-  horizon level attribute containing soil color (sRGB) red values
+  horizon-level attributes, either character of length 1 specifying a
+  column containing Munsell or sRGB in hex notation, or character vector
+  of three column names containing either sRGB or CIELAB color
+  coordinates. sRGB color coordinates should be within the range of 0 to
+  1.
 
-- g:
+- space:
 
-  horizon level attribute containing soil color (sRGB) green values
-
-- b:
-
-  horizon level attribute containing soil color (sRGB) blue values
+  character, either 'sRGB' or 'LAB', specifying color space
 
 - method:
 
   algorithm used to compute color signature, `colorBucket`,
   `depthSlices`, or `pam`
 
+- perceptualDistMat:
+
+  logical, optionally return a distance matrix based on perceptual color
+  distances, when “method\` is one of 'depthSlices' or 'pam', see
+  Details
+
 - pam.k:
 
-  number of classes to request from
-  [`cluster::pam()`](https://rdrr.io/pkg/cluster/man/pam.html)
+  number of color classes for `method = 'pam'`
 
-- RescaleLightnessBy:
+- prob:
 
-  rescaling factor for CIE LAB L-coordinate
+  numeric vector, requested percentiles for `method = 'depthSlices'`
 
 - useProportions:
 
@@ -63,32 +72,79 @@ soilColorSignature(
 - apply.fun:
 
   function passed to `aqp::profileApply(APPLY.FUN)` argument, can be
-  used to add progress bars via `pbapply::pblapply`, or parallel
-  processing with `furrr::future_map`
+  used to add progress bars via `pbapply::pblapply()`, or parallel
+  processing with `furrr::future_map()`
+
+- r:
+
+  deprecated, use `color` argument
+
+- g:
+
+  deprecated, use `color` argument
+
+- b:
+
+  deprecated, use `color` argument
+
+- RescaleLightnessBy:
+
+  deprecated, scaling factor for CIELAB L-coordinate
 
 ## Value
 
-For the `colorBucket` method, a `data.frame` object containing:
+For the `colorBucket` method, a `data.frame`:
 
 - id column: set according to `idname(spc)`
 
-- `.white.pigment`: proportion or quantity of CIE LAB L-values
+- `.white.pigment`: proportion or quantity of CIELAB L-values
 
-- `.red.pigment`: proportion or quantity of CIE LAB positive A-values
+- `.red.pigment`: proportion or quantity of CIELAB positive A-values
 
-- `.green.pigment`: proportion or quantity of CIE LAB negative A-values
+- `.green.pigment`: proportion or quantity of CIELAB negative A-values
 
-- `.yellow.pigment`: proportion or quantity of CIE LAB positive B-values
+- `.yellow.pigment`: proportion or quantity of CIELAB positive B-values
 
-- `.blue.pigment`: proportion or quantity of CIE LAB negative B-values
+- `.blue.pigment`: proportion or quantity of CIELAB negative B-values
 
 Column names can be adjusted with the `pigmentNames` argument.
 
-For the `depthSlices` method ...
+For the `depthSlices` method, a `data.frame`:
 
-For the `pam` method ...
+- id column: set according to `idname(spc)`
+
+- `L.1`, `A.1`, `B.1`: CIELAB color coordinates associated with the
+  first depth slice, at depth percentile given in `prob[1]`
+
+- ...
+
+- `L.n`, `A.n`, `B.n`: CIELAB color coordinates associated with the `n`
+  depth slice, at depth percentile given in `prob[n]`
+
+For the `pam` method, a `data.frame`:
+
+- id column: set according to `idname(spc)`
+
+- `L.1`, `A.1`, `B.1`: CIELAB color coordinates associated with the
+  first color cluster, after sorting all clusters in ascending order
+  along L, A, B axes.
+
+- ...
+
+- `L.n`, `A.n`, `B.n`: CIELAB color coordinates associated with the
+  `nth` color cluster, after sorting all clusters in ascending order
+  along L, A, B axes.
+
+When `perceptualDistMat = TRUE` and `method` is one of 'depthSlices' or
+'pam', a distance matrix is returned.
 
 ## Details
+
+Interpreation of color signature.
+
+Choices related to weighting, scaling, and distance metric.
+
+Perceptual distances (dE00), summed over color groups.
 
 See the [related
 tutorial](http://ncss-tech.github.io/AQP/aqp/soil-color-signatures.md).
@@ -99,7 +155,7 @@ https://en.wikipedia.org/wiki/Lab_color_space
 
 ## See also
 
-[`munsell2rgb`](https://ncss-tech.github.io/aqp/reference/munsell2rgb.md)
+[`plotProfileDendrogram()`](https://ncss-tech.github.io/aqp/reference/plotProfileDendrogram.md)
 
 ## Author
 
@@ -112,12 +168,9 @@ D.E. Beaudette
 data(sp1)
 depths(sp1) <- id ~ top + bottom
 
-# convert Munsell -> sRGB triplets
-rgb.data <- munsell2rgb(sp1$hue, sp1$value, sp1$chroma, return_triplets = TRUE)
-sp1$r <- rgb.data$r
-sp1$g <- rgb.data$g
-sp1$b <- rgb.data$b
+# Munsell notation
+sp1$m <- sprintf("%s %s/%s", sp1$hue, sp1$value, sp1$chroma)
 
 # extract color signature
-pig <- soilColorSignature(sp1)
+pig <- soilColorSignature(sp1, color = 'm')
 ```

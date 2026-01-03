@@ -2,7 +2,7 @@
 
 [![aqp hexsticker (Paxton, Montauk, Woodbridge, Ridgebury, Whitman,
 Catden soil series
-dendogram)](https://raw.githubusercontent.com/ncss-tech/aqp/master/misc/hexstickers/aqp_sticker_v2.png "aqp hexsticker (Paxton, Montauk, Woodbridge, Ridgebury, Whitman, Catden soil series dendogram)")](https://raw.githubusercontent.com/ncss-tech/aqp/master/misc/hexstickers/aqp_sticker_v2.png)
+dendogram)](https://raw.githubusercontent.com/ncss-tech/aqp/master/misc/hexstickers/aqp_sticker_v3-fixed.png "aqp hexsticker (Paxton, Montauk, Woodbridge, Ridgebury, Whitman, Catden soil series dendogram)")](https://raw.githubusercontent.com/ncss-tech/aqp/master/misc/hexstickers/aqp_sticker_v3-fixed.png)
 
 The Algorithms for Quantitative Pedology (AQP) project was started in
 2009 to organize a loosely-related set of concepts and source code on
@@ -28,23 +28,22 @@ platform for bridging the gap between pedometric theory and practice.
 Get the stable version from CRAN:
 
 ``` r
-install.packages('aqp', dep=TRUE)
+install.packages('aqp')
 ```
 
 Get the development version from Github, after installing the CRAN
 version + dependencies:
 
 ``` r
-remotes::install_github("ncss-tech/aqp", dependencies=FALSE, upgrade=FALSE, build=FALSE)
+remotes::install_github("ncss-tech/aqp", dependencies = FALSE, upgrade = FALSE, build = FALSE)
 ```
 
 Install suggested packages:
 
 ``` r
-p <- c("colorspace", "ape", "soilDB", "latticeExtra", "tactile", "compositions", 
+p <- c("soilDB", "latticeExtra", "tactile", "compositions", 
 "sharpshootR", "markovchain", "xtable", "testthat", "Gmedian", 
-"farver", "Hmisc", "tibble", "RColorBrewer", "scales", "digest", 
- "mpspline2", "soiltexture", "knitr", "rmarkdown", "mvtnorm")
+"Hmisc", "tibble", "RColorBrewer", "scales", "mpspline2", "soiltexture", "knitr", "rmarkdown", "mvtnorm")
 
 install.packages(p)
 ```
@@ -364,6 +363,14 @@ citation("aqp")
 - [`` `$`( ``*`<SoilProfileCollection>`*`)`](https://ncss-tech.github.io/aqp/reference/dollarsign.md)
   : Get data from column of horizon or site data in a
   SoilProfileCollection
+
+- [`.colorSig2PerceptualDistMat()`](https://ncss-tech.github.io/aqp/reference/dot-colorSig2PerceptualDistMat.md)
+  : Interpret a color signature containing color groups of CIELAB
+  coordinates using perceptual distance via CIE dE00
+
+- [`.detectColorSpec()`](https://ncss-tech.github.io/aqp/reference/dot-detectColorSpec.md)
+  : Detect color specification from a vector of values, or a matrix of
+  color coordinates
 
 - [`` `[[<-`( ``*`<SoilProfileCollection>`*`)`](https://ncss-tech.github.io/aqp/reference/doublebracket-set.md)
   : Add or change column of horizon or site data in a
@@ -703,7 +710,7 @@ citation("aqp")
   Plot Multiple `SoilProfileCollection` Objects
 
 - [`plotProfileDendrogram()`](https://ncss-tech.github.io/aqp/reference/plotProfileDendrogram.md)
-  : Plot soil profiles below a dendrogram
+  : Plot soil profiles below a dendrogram or cladogram
 
 - [`plot_distance_graph()`](https://ncss-tech.github.io/aqp/reference/plot_distance_graph.md)
   : Between Individual Distance Plot
@@ -770,6 +777,9 @@ citation("aqp")
 
 - [`shannonEntropy()`](https://ncss-tech.github.io/aqp/reference/shannonEntropy.md)
   : Shannon Entropy
+
+- [`shuffle()`](https://ncss-tech.github.io/aqp/reference/shuffle.md) :
+  Shuffle Horizons of a SoilProfileCollection
 
 - [`sierraTransect`](https://ncss-tech.github.io/aqp/reference/sierraTransect.md)
   : Soil Physical and Chemical Data Related to Studies in the Sierra
