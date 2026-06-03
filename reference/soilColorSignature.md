@@ -140,6 +140,9 @@ When `perceptualDistMat = TRUE` and `method` is one of 'depthSlices' or
 
 ## Details
 
+Missing colors (NA) are ignored in the creation of soil color
+signatures.
+
 Interpreation of color signature.
 
 Choices related to weighting, scaling, and distance metric.
@@ -164,12 +167,15 @@ D.E. Beaudette
 ## Examples
 
 ``` r
+
 # trivial example, not very interesting
 data(sp1)
 depths(sp1) <- id ~ top + bottom
 
 # Munsell notation
-sp1$m <- sprintf("%s %s/%s", sp1$hue, sp1$value, sp1$chroma)
+sp1$m <- formatMunsell(sp1$hue, sp1$value, sp1$chroma)
+#> some colors have non-standard hue, result is NA
+#> some colors missing hue or value, result is NA
 
 # extract color signature
 pig <- soilColorSignature(sp1, color = 'm')

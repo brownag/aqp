@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>An Overview of the aqp Package • aqp</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="An Overview of the aqp Package">
 </head>
@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">aqp</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -215,6 +215,9 @@ templates</li>
 <li>
 <code><a href="../reference/random_profile.html">random_profile()</a></code>: generate random SPC from suite of
 depth functions</li>
+<li>
+<code><a href="../reference/rp.html">rp()</a></code>: convenient wrapper of
+<code><a href="../reference/random_profile.html">random_profile()</a></code> for simulating large colections</li>
 </ul>
 </div>
 <div class="section level4">
@@ -278,7 +281,8 @@ expressions</li>
 <code>[[</code>: access site or horizon-level columns by name</li>
 <li>
 <code>k-index expressions</code>: <code>.FIRST</code>,
-<code>.LAST</code>, <code>.HZID</code>, <code>.NHZ</code>
+<code>.LAST</code>, <code>.HZID</code>, <code>.NHZ</code>,
+<code>.BOTTOM</code>, <code>.TOP</code>
 </li>
 </ul>
 </div>
@@ -322,6 +326,9 @@ a single SPC</li>
 <li>
 <code><a href="../reference/perturb.html">perturb()</a></code>: randomly adjust horizon thickness or depths
 to simulate from a template SPC</li>
+<li>
+<code><a href="../reference/shuffle.html">shuffle()</a></code>: randomly shuffle horizon data or entire
+horizons</li>
 <li>
 <code><a href="../reference/warpHorizons.html">warpHorizons()</a></code>: expand / contract horizon
 thickness</li>
@@ -496,6 +503,9 @@ profile sketch</li>
 <code><a href="../reference/groupedProfilePlot.html">groupedProfilePlot()</a></code>: create grouped sketches of soil
 profiles</li>
 <li>
+<code><a href="../reference/plotProfileDendrogram.html">plotProfileDendrogram()</a></code>: “hang” profile sketches from a
+dendrogram</li>
+<li>
 <code><a href="../reference/plotMultipleSPC.html">plotMultipleSPC()</a></code>: create sketches from multiple,
 possibly non-conformal SPCs</li>
 <li>
@@ -526,8 +536,8 @@ Munsell notation</li>
 <code><a href="../reference/munsell2rgb.html">munsell2rgb()</a></code>: convert Munsell notation to sRGB or
 CIELAB color coordinates</li>
 <li>
-<code><a href="../reference/parseMunsell.html">parseMunsell()</a></code>: parse and optionally convert a munsell
-color</li>
+<code><a href="../reference/parseMunsell.html">parseMunsell()</a></code>: parse and optionally convert Munsell
+color notation</li>
 <li>
 <code><a href="../reference/spec2Munsell.html">spec2Munsell()</a></code>: estimate the closest Munsell color
 given reflectance spectra in the visible range</li>
@@ -565,8 +575,15 @@ profiles within an SPC</li>
 <code><a href="../reference/colorChart.html">colorChart()</a></code>: Munsell color book representation of
 color frequency</li>
 <li>
+<code><a href="../reference/colorVariation.html">colorVariation()</a></code>: describe color variation using dE00
+(based on average human color perception)</li>
+<li>
 <code><a href="../reference/aggregateColor.html">aggregateColor()</a></code>: estimate color proportions within an
 SPC according within groups of horizons</li>
+<li>
+<code><a href="../reference/aggregateColorPlot.html">aggregateColorPlot()</a></code>: graphical explanation of output
+from <code><a href="../reference/aggregateColor.html">aggregateColor()</a></code>
+</li>
 <li>
 <code><a href="../reference/colorQuantiles.html">colorQuantiles()</a></code>: marginal and L1 quantiles of color in
 CIELAB coordinates</li>
@@ -576,6 +593,12 @@ CIELAB coordinates</li>
 <h4 id="utility-1">Utility<a class="anchor" aria-label="anchor" href="#utility-1"></a>
 </h4>
 <ul>
+<li>
+<code><a href="../reference/validateMunsell.html">validateMunsell()</a></code>: test for errors in Munsell notation
+that prevent correct interpretation</li>
+<li>
+<code><a href="../reference/launderMunsell.html">launderMunsell()</a></code>: correct minor errors in Munsell
+notation</li>
 <li>
 <code><a href="../reference/huePosition.html">huePosition()</a></code>: generate an ordered factor of the
 standard Munsell hues</li>

@@ -9,6 +9,7 @@ collection, regardless of which profile they came from.
 ## Usage
 
 ``` r
+# S4 method for class 'SoilProfileCollection'
 mutate_profile(object, ..., col_names = NULL, horizon_level = NULL)
 
 mutate_profile_raw(object, expr, col_names = NULL, horizon_level = NULL)
@@ -65,6 +66,7 @@ Andrew G. Brown.
 ## Examples
 
 ``` r
+
 data(sp4)
 depths(sp4) <- id ~ top + bottom
 

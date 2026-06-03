@@ -2,7 +2,7 @@
 
 A very simple function for generating labeled swatches of soil colors.
 Largely based on
-[`colorspace::swatchplot`](https://colorspace.R-Forge.R-project.org/reference/swatchplot.html).
+[`colorspace::swatchplot`](https://rdrr.io/pkg/colorspace/man/swatchplot.html).
 
 ## Usage
 
@@ -48,7 +48,7 @@ soilPalette(
 - ...:
 
   further arguments to
-  [`colorspace::swatchplot`](https://colorspace.R-Forge.R-project.org/reference/swatchplot.html)
+  [`colorspace::swatchplot`](https://rdrr.io/pkg/colorspace/man/swatchplot.html)
 
 ## Value
 
@@ -65,6 +65,7 @@ D.E. Beaudette
 ## Examples
 
 ``` r
+
 # maybe useful for teaching about soil color
 
 par(mfrow=c(2,1), mar=c(1,1,1,1))

@@ -75,6 +75,7 @@ Andrew G. Brown
 ## Examples
 
 ``` r
+
 ### single source "harmonization" of single-profile with range -> single attribute, multi-profile
 
 # make some test data
@@ -102,13 +103,13 @@ plotSPC(h3, color = "foo")
 plotSPC(h3, color = "bar")
 
 head(horizons(h3))
-#>           id top bottom       foo         bar hzID
-#> 1 10_method1   0     15 -3.949882  -0.4669061    1
-#> 2 10_method1  15     43 -9.046262  -0.1005962    2
-#> 3 10_method1  43     68 -1.072998 -10.6224367    3
-#> 4 10_method2   0     15  8.020219   8.7493569    4
-#> 5 10_method2  15     43  9.242370  17.9955380    5
-#> 6 10_method2  43     68  1.133050  25.4371732    6
+#>           id top bottom        foo       bar hzID
+#> 1 10_method1   0     30  10.722197 -2.723811    1
+#> 2 10_method1  30     54  -0.471373  4.934657    2
+#> 3 10_method1  54     67 -12.514411  3.586405    3
+#> 4 10_method1  67     96  -5.406000  3.581855    4
+#> 5 10_method2   0     30 -10.304284  5.665664    5
+#> 6 10_method2  30     54 -19.933899 -1.106145    6
 
 # a slight modification, "method 1" onlyused for "foo" and "method 3" for "bar"
 h3 <- harmonize(spc, x.names = list(foo = c(method1 = "p1", method2 = "p2"),

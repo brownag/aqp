@@ -50,12 +50,13 @@ functions and decisions made during adjustment of `x`.
 ## Examples
 
 ``` r
+
 s <- c(1, 2, 2.3, 4, 5, 5, 7)
 
 # simulated annealing, solution is non-deterministic
 fixOverlap(s, thresh = 0.6, method = 'S')
-#> 16 iterations
-#> [1] 0.9688161 1.7983126 2.7698841 3.7717062 5.3512060 4.4466996 6.9937425
+#> 37 iterations
+#> [1] 1.044590 1.931166 2.622084 3.499425 4.453864 5.275159 6.979491
 #> attr(,"converged")
 #> [1] TRUE
 

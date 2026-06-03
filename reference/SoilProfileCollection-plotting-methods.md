@@ -39,6 +39,7 @@ plotSPC(
   cex.id = cex.names + (0.2 * cex.names),
   font.id = 2,
   srt.id = 0,
+  offset.id = 0.5,
   print.id = TRUE,
   id.style = "auto",
   plot.order = 1:length(x),
@@ -174,6 +175,10 @@ plot(x, y, ...)
 - srt.id:
 
   rotation applied to `label`, only when `id.style = 'top'`
+
+- offset.id:
+
+  vertical offset applied to `label`, only when `id.style = 'top'`
 
 - print.id:
 
@@ -454,6 +459,7 @@ D.E. Beaudette
 ## Examples
 
 ``` r
+
 # keep examples from using more than 2 cores
 data.table::setDTthreads(Sys.getenv("OMP_THREAD_LIMIT", unset = 2))
 
@@ -645,7 +651,7 @@ plotSPC(x,
 # align / adjust relative x positions
 set.seed(111)
 pos <- alignTransect(xoff, x.min = 1, x.max = length(x), thresh = 0.65)
-#> 111 iterations
+#> 136 iterations
 
 # y-offset is automatically re-ordered according to
 # plot.order

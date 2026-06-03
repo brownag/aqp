@@ -18,6 +18,9 @@
 - [`NCSP()`](https://ncss-tech.github.io/aqp/reference/NCSP.md) :
   Numerical Classification of Soil Profiles
 
+- [`Ohz.colors`](https://ncss-tech.github.io/aqp/reference/Ohz.colors.md)
+  : Representative O Horizon Colors
+
 - [`ROSETTA.centroids`](https://ncss-tech.github.io/aqp/reference/ROSETTA.centroids.md)
   : Average Hydraulic Parameters from the ROSETTA Model by USDA Soil
   Texture Class
@@ -131,6 +134,9 @@
 
 - [`colorQuantiles()`](https://ncss-tech.github.io/aqp/reference/colorQuantiles.md)
   : Soil Color Range via Quantiles
+
+- [`colorVariation()`](https://ncss-tech.github.io/aqp/reference/colorVariation.md)
+  : Quantitative Description of Color Variation
 
 - [`c(`*`<SoilProfileCollection>`*`)`](https://ncss-tech.github.io/aqp/reference/combine-SoilProfileCollection-method.md)
   [`combine(`*`<SoilProfileCollection>`*`)`](https://ncss-tech.github.io/aqp/reference/combine-SoilProfileCollection-method.md)
@@ -259,6 +265,9 @@
 - [`flagOverlappingHz()`](https://ncss-tech.github.io/aqp/reference/flagOverlappingHz.md)
   : Flag perfectly overlapping horizons within a SoilProfileCollection
 
+- [`formatMunsell()`](https://ncss-tech.github.io/aqp/reference/formatMunsell.md)
+  : Format Munsell Notation from Hue, Value, and Chroma
+
 - [`fragmentClasses()`](https://ncss-tech.github.io/aqp/reference/fragmentClasses.md)
   : Coarse Fragment Class Labels and Diameter
 
@@ -312,8 +321,8 @@
 - [`glomApply()`](https://ncss-tech.github.io/aqp/reference/glomApply.md)
   : Subset an SPC by applying glom to each profile
 
-- [`grepSPC()`](https://ncss-tech.github.io/aqp/reference/grepSPC.md) :
-  Subset SPC with pattern-matching for text-based attributes
+- [`grepSPC(`*`<SoilProfileCollection>`*`)`](https://ncss-tech.github.io/aqp/reference/grepSPC.md)
+  : Subset SPC with pattern-matching for text-based attributes
 
 - [`groupSPC()`](https://ncss-tech.github.io/aqp/reference/groupSPC.md)
   : Store groupings within a profile collection.
@@ -386,7 +395,7 @@
 - [`hzAbove()`](https://ncss-tech.github.io/aqp/reference/hzOffset.md)
   [`hzBelow()`](https://ncss-tech.github.io/aqp/reference/hzOffset.md)
   [`hzOffset()`](https://ncss-tech.github.io/aqp/reference/hzOffset.md)
-  : Horizons Above or Below
+  : Select Horizons Above or Below a Reference Horizon
 
 - [`hzTopographyCodeToLineType()`](https://ncss-tech.github.io/aqp/reference/hzTopographyCodeToLineType.md)
   : Convert Horizon Boundary Topography to Line Type
@@ -451,6 +460,9 @@
 - [`jacobs2000`](https://ncss-tech.github.io/aqp/reference/jacobs2000.md)
   : Soil Morphologic Data from Jacobs et al. 2002.
 
+- [`launderMunsell()`](https://ncss-tech.github.io/aqp/reference/launderMunsell.md)
+  : Fix Common Errors in Munsell Notation
+
 - [`length(`*`<SoilProfileCollection>`*`)`](https://ncss-tech.github.io/aqp/reference/length.md)
   : Get the number of profiles in a SoilProfileCollection
 
@@ -501,11 +513,12 @@
 - [`munsellHuePosition`](https://ncss-tech.github.io/aqp/reference/munsellHuePosition.md)
   : Munsell Hue Position Reference
 
-- [`mutate_profile()`](https://ncss-tech.github.io/aqp/reference/mutate_profile.md)
+- [`mutate_profile(`*`<SoilProfileCollection>`*`)`](https://ncss-tech.github.io/aqp/reference/mutate_profile.md)
   [`mutate_profile_raw()`](https://ncss-tech.github.io/aqp/reference/mutate_profile.md)
   : Transform a SPC (by profile) with a set of expressions
 
 - [`names(`*`<SoilProfileCollection>`*`)`](https://ncss-tech.github.io/aqp/reference/names.md)
+  [`.DollarNames(`*`<SoilProfileCollection>`*`)`](https://ncss-tech.github.io/aqp/reference/names.md)
   : Get names of columns in site and horizons table
 
 - [`nrow(`*`<SoilProfileCollection>`*`)`](https://ncss-tech.github.io/aqp/reference/nrow.md)
@@ -629,7 +642,7 @@
   SoilProfileCollection
 
 - [`site(`*`<SoilProfileCollection>`*`)`](https://ncss-tech.github.io/aqp/reference/site.md)
-  [`` `site<-`() ``](https://ncss-tech.github.io/aqp/reference/site.md)
+  [`` `site<-`( ``*`<SoilProfileCollection>`*`)`](https://ncss-tech.github.io/aqp/reference/site.md)
   : Retrieve site data from SoilProfileCollection
 
 - [`` `siteNames<-`( ``*`<SoilProfileCollection>`*`)`](https://ncss-tech.github.io/aqp/reference/siteNames.md)
@@ -707,7 +720,7 @@
   Split a `SoilProfileCollection` into a list based on types of horizon
   logic errors
 
-- [`subApply()`](https://ncss-tech.github.io/aqp/reference/subApply.md)
+- [`subApply(`*`<SoilProfileCollection>`*`)`](https://ncss-tech.github.io/aqp/reference/subApply.md)
   : Subset SPC based on result of performing function on each profile
 
 - [`subset(`*`<SoilProfileCollection>`*`)`](https://ncss-tech.github.io/aqp/reference/subset-SoilProfileCollection-method.md)
@@ -766,6 +779,9 @@
 
 - [`validSpatialData(`*`<SoilProfileCollection>`*`)`](https://ncss-tech.github.io/aqp/reference/validSpatialData.md)
   : Check for valid spatial reference of profiles
+
+- [`validateMunsell()`](https://ncss-tech.github.io/aqp/reference/validateMunsell.md)
+  : Validate Standard Munsell Notation
 
 - [`warpHorizons()`](https://ncss-tech.github.io/aqp/reference/warpHorizons.md)
   : Inflate / Deflate Horizon Thickness

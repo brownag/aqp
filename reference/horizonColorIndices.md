@@ -49,6 +49,7 @@ Andrew G. Brown
 ## Examples
 
 ``` r
+
 # keep examples from using more than 2 cores
 data.table::setDTthreads(Sys.getenv("OMP_THREAD_LIMIT", unset = 2))
 
@@ -61,7 +62,9 @@ depths(sp1) <- id ~ top + bottom
 site(sp1) <- ~ group
 
 # use Munsell color notation as horizon name
-sp1$m <- sprintf("%s %s/%s", sp1$hue, sp1$value, sp1$chroma)
+sp1$m <- formatMunsell(sp1$hue, sp1$value, sp1$chroma)
+#> some colors have non-standard hue, result is NA
+#> some colors missing hue or value, result is NA
 
 # compute indices
 # merged into `sp1` with left-join on hzidname(sp1)

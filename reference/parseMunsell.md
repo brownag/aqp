@@ -37,6 +37,11 @@ parseMunsell(munsellColor, convertColors = TRUE, delim = NA, ...)
 
 a `data.frame` object
 
+## Note
+
+This function should be able to parse and convert 100k Munsell colors in
+0.5 seconds (single-threaded, 2.5GHz i7).
+
 ## Author
 
 P. Roudier and D.E. Beaudette
@@ -44,6 +49,7 @@ P. Roudier and D.E. Beaudette
 ## Examples
 
 ``` r
+
 # just sRGB
 parseMunsell("10YR 3/5", return_triplets = TRUE)
 #>           r         g          b

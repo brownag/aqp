@@ -71,7 +71,7 @@ colorContrastPlot(
 - ...:
 
   further arguments to
-  [`colorspace::swatchplot`](https://colorspace.R-Forge.R-project.org/reference/swatchplot.html)
+  [`colorspace::swatchplot`](https://rdrr.io/pkg/colorspace/man/swatchplot.html)
 
 ## Note
 
@@ -89,6 +89,7 @@ D.E. Beaudette
 ## Examples
 
 ``` r
+
 # keep examples from using more than 2 cores
 data.table::setDTthreads(Sys.getenv("OMP_THREAD_LIMIT", unset = 2))
 

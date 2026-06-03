@@ -1,6 +1,94 @@
 # Changelog
 
-## aqp 2.3 (2026-01-02)
+## aqp 2.3.2 (2026-04-29)
+
+CRAN release: 2026-04-30
+
+- new function
+  [`formatMunsell()`](https://ncss-tech.github.io/aqp/reference/formatMunsell.md)
+  for safely formatting Munsell colors from hue, value, and chroma
+- [`launderMunsell()`](https://ncss-tech.github.io/aqp/reference/launderMunsell.md)
+  gains additional formatting fixes / failures to NA
+- new option to enable function verbosity:
+  `options(.aqp.verbose = TRUE)` default: `FALSE`
+- added N 1/ chip to Munsell LUT and estimated neutral chip reflectance
+  spectra
+- slight adjustments to Munsell neutral chips:
+  - N 2-7 (darker)
+  - N 9-9.5/ (lighter)
+- [`estimateSoilColor()`](https://ncss-tech.github.io/aqp/reference/estimateSoilColor.md)
+  much faster when given duplicate colors to estimate
+
+## aqp 2.3.1 (2026-03-19)
+
+CRAN release: 2026-03-20
+
+- CRAN release
+- new example data `Ohz.colors`, useful for estimating organic soil
+  material color
+- new function
+  [`launderMunsell()`](https://ncss-tech.github.io/aqp/reference/launderMunsell.md)
+  for fixing encoding of neutral colors
+- new function
+  [`validateMunsell()`](https://ncss-tech.github.io/aqp/reference/validateMunsell.md)
+  for checking Munsell color notation
+  ([\#339](https://github.com/ncss-tech/aqp/issues/339))
+- [`colorVariation()`](https://ncss-tech.github.io/aqp/reference/colorVariation.md)
+  updates:
+  - new method ‘L1’ for comparing colors to L1-median (requires Gmedian
+    package)
+  - fixed bug when `m` contains non-standard Munsell notation
+- [`estimateSoilColor()`](https://ncss-tech.github.io/aqp/reference/estimateSoilColor.md)
+  updates:
+  - gains new arguments `method` and `returnMunsell`
+  - Procrustes-based model updated from larger database of mineral soils
+  - new OLS-based model added, select with `method = 'ols'`
+  - detailed descriptions of methods added to manual page
+  - expanded demonstration in Munsell Color Conversion vignette
+- new argument to
+  [`plotSPC()`](https://ncss-tech.github.io/aqp/reference/SoilProfileCollection-plotting-methods.md)
+  -\> `offset.id` used to manually adjust vertical offset to all profile
+  IDs (c/o Daniel Saurette)
+- bug fix in
+  [`col2Munsell()`](https://ncss-tech.github.io/aqp/reference/col2Munsell.md)
+  when passed 0-length character
+- bug fix in `plotSPC(x, max.depth != NULL)` when `x` contains
+  degenerate profiles (no horizons)
+- bug fix in
+  [`colorChart()`](https://ncss-tech.github.io/aqp/reference/colorChart.md)
+  when using groups and neutral colors
+- bug fix in
+  [`soilColorSignature()`](https://ncss-tech.github.io/aqp/reference/soilColorSignature.md),
+  NA incorrectly interpreted when `color` argument is supplied hex
+  encoded sRGB
+- bug fix in
+  [`soilColorSignature()`](https://ncss-tech.github.io/aqp/reference/soilColorSignature.md),
+  [`cluster::pam()`](https://rdrr.io/pkg/cluster/man/pam.html)
+  optimization would very rarely hang
+  - seems to be a problem with (`pamonce = >=5`) - AMELAR OSD, moist
+    colors
+- major changes to
+  [`hzAbove()`](https://ncss-tech.github.io/aqp/reference/hzOffset.md)
+  and
+  [`hzBelow()`](https://ncss-tech.github.io/aqp/reference/hzOffset.md):
+  - new default: `offset = NULL` selects all horizons above or below
+    reference horizons
+  - new argument `single` for lumping multiple reference horizons into a
+    contiguous composite
+  - new examples with graphical explanation
+- major changes to
+  [`addBracket()`](https://ncss-tech.github.io/aqp/reference/addBracket.md):
+  - when not specified, horizon depth names taken from last call to
+    [`plotSPC()`](https://ncss-tech.github.io/aqp/reference/SoilProfileCollection-plotting-methods.md)
+  - new arguments: `labcol` (label column), `agg` (aggregate multiple
+    brackets / profile), `hzDepths` (override bracket top and bottom
+    depth column names)
+- code-completion and preview for SPC objects in RStudio
+  ([@brownag](https://github.com/brownag))
+
+## aqp 2.3 (2026-01-16)
+
+CRAN release: 2026-01-17
 
 - CRAN release
 - aqp now requires R \>= 4.1
@@ -14,6 +102,10 @@
 - new function
   [`mu_confusion_matrix()`](https://ncss-tech.github.io/aqp/reference/mu_confusion_matrix.md)
   ([@smroecker](https://github.com/smroecker))
+- new function
+  [`colorVariation()`](https://ncss-tech.github.io/aqp/reference/colorVariation.md)
+  for describing color variation in terms of average human color
+  perception
 - new function
   [`shuffle()`](https://ncss-tech.github.io/aqp/reference/shuffle.md)
   for re-ordering horizon data or horizons within a
@@ -31,12 +123,12 @@
   gains `scaleTo` argument for scaling profiles to specific soil depth
 - [`soilColorSignature()`](https://ncss-tech.github.io/aqp/reference/soilColorSignature.md)
   changes ([\#335](https://github.com/ncss-tech/aqp/issues/335)):
-- gains generalized color specification via new arguments `color` and
-  `space`
-- new argument to control development of a perceptual distance matrix:
-  `perceptualDistMat = TRUE`
-- deprecated arguments `r`, `g`, `b`, `RescaleLightnessBy`, warning
-  issued until the next major release
+  - gains generalized color specification via new arguments `color` and
+    `space`
+  - new argument to control development of a perceptual distance matrix:
+    `perceptualDistMat = TRUE`
+  - deprecated arguments `r`, `g`, `b`, `RescaleLightnessBy`, warning
+    issued until the next major release
 - [`electroStatics_1D()`](https://ncss-tech.github.io/aqp/reference/electroStatics_1D.md)
   now accepts vector of charge density `q` or single value (original
   implementation)
@@ -75,8 +167,8 @@ CRAN release: 2025-02-15
   [`stats::cmdscale()`](https://rdrr.io/r/stats/cmdscale.html) instead
   of `MASS:isoMDS()`
 - migrating a few functions from sharpshootR to aqp:
-- [`plotProfileDendrogram()`](https://ncss-tech.github.io/aqp/reference/plotProfileDendrogram.md)
-- [`aggregateColorPlot()`](https://ncss-tech.github.io/aqp/reference/aggregateColorPlot.md)
+  - [`plotProfileDendrogram()`](https://ncss-tech.github.io/aqp/reference/plotProfileDendrogram.md)
+  - [`aggregateColorPlot()`](https://ncss-tech.github.io/aqp/reference/aggregateColorPlot.md)
 - fix for
   [`hz_segment()`](https://ncss-tech.github.io/aqp/reference/hz_segment.md)
   and [`NCSP()`](https://ncss-tech.github.io/aqp/reference/NCSP.md) with
@@ -635,9 +727,8 @@ CRAN release: 2020-10-19
 - new function `bootstrapSoilTexture` for simulating realistic
   sand/silt/clay compositions
 - `combine` replaces/expands
-  [`aqp::union`](https://rdatatable.gitlab.io/data.table/reference/setops.html)
-  due to conflicts with
-  [`base::union`](https://rdrr.io/r/base/sets.html)
+  [`aqp::union`](https://rdrr.io/pkg/data.table/man/setops.html) due to
+  conflicts with [`base::union`](https://rdrr.io/r/base/sets.html)
 - `split` receives some upgrades to the S4 definition to increase parity
   with `split.default`
 - `filter` is now an alias for new method `subset`, which mirrors
@@ -671,10 +762,10 @@ CRAN release: 2020-10-19
   (<https://github.com/ncss-tech/aqp/pull/155>)
 - `depths<-` has been optimized and minimally validates input data
 - default horizon ID (`hzID`) is now a `character` data type
-- [`aqp::union`](https://rdatatable.gitlab.io/data.table/reference/setops.html)
-  uses `depths<-` internally; explicitly enforcing profile ID + top
-  depth order in horizon data is safer but results in different ordering
-  if `union`-ing IDs that “intermingle” (need to be re-sorted).
+- [`aqp::union`](https://rdrr.io/pkg/data.table/man/setops.html) uses
+  `depths<-` internally; explicitly enforcing profile ID + top depth
+  order in horizon data is safer but results in different ordering if
+  `union`-ing IDs that “intermingle” (need to be re-sorted).
 - new experimental method is `permute_profile`; similar to `sim` but for
   boundaries. The interface to this function is likely to change/be
   expanded.

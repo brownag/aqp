@@ -75,6 +75,7 @@ Forensic Sci, 65: 438-449. https://doi.org/10.1111/1556-4029.14193
 ## Examples
 
 ``` r
+
 # 7.5YR 4/4 (the one and only)
 
 equivalentMunsellChips("7.5YR", 4, 4)
@@ -132,7 +133,7 @@ veryred <- equivalentMunsellChips("10R", 6, 28)[[1]]
 par(mar=c(0,0,1,1))
 
 pie(rep(1, nrow(veryred)), col = with(veryred, munsell2rgb(hue, value, chroma)),
-    label = with(veryred, sprintf("%s %s/%s", hue, value, chroma)))
+    label = with(veryred, formatMunsell(hue, value, chroma)))
 
 
 table(veryred$hue) # 2 hues

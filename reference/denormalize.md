@@ -49,6 +49,7 @@ Andrew G. Brown, Dylan Beaudette
 ## Examples
 
 ``` r
+
 data(sp1)
 
 # create a SoilProfileCollection from horizon data
@@ -70,7 +71,7 @@ length(sp1)
 table(sp1$sitevar)
 #> 
 #> 0 1 
-#> 6 3 
+#> 4 5 
 
 # compare number of horizons to number of horizon-level copies of sitevar `hz.'sitevar`
 nrow(sp1)
@@ -78,5 +79,5 @@ nrow(sp1)
 table(sp1$hz.sitevar)
 #> 
 #>  0  1 
-#> 39 21 
+#> 27 33 
 ```
